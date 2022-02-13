@@ -15,11 +15,13 @@ class Any_file
 public:
 	Any_file(const char* name, Type type);
 
-	bool init() const;
+	bool is_open() const;
 
-	bool get_data(char* bufer, const signed long long int size);
+	signed long long int get_data(char* bufer, const signed long long int size);
 
 	bool write_data(const char* bufer, const signed long long int size);
+
+	bool eof();
 
 	signed long long int get_size() const;
 
@@ -27,6 +29,8 @@ public:
 
 private:
 	Any_file() = delete;
+
+	bool _init() const;
 
 	std::fstream file;
 	mutable Type type;

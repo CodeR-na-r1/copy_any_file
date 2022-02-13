@@ -15,10 +15,12 @@ Any_file::Any_file(const char* name, Type type)
 	this->size = this->file.tellg();
 	this->file.seekg(0, std::ios::beg);
 
+	this->_init();
+
 	return;
 }
 
-bool Any_file::init() const
+bool Any_file::_init() const
 {
 	if (this->file.is_open())
 		return false;
@@ -28,10 +30,15 @@ bool Any_file::init() const
 	return true;
 }
 
-bool Any_file::get_data(char* bufer, const signed long long int size)
+bool Any_file::is_open() const
+{
+	return (this->type == Type::error) ? false : true;
+}
+
+signed long long int Any_file::get_data(char* bufer, const signed long long int size)
 {
 	if (this->type != Type::input)
-		return true;
+		return 0;
 
 	signed long long int length = ((this->size - this->iterator) <= size) ? this->size - this->iterator : size;
 	signed long long int i = 0;
@@ -43,7 +50,7 @@ bool Any_file::get_data(char* bufer, const signed long long int size)
 
 	this->iterator += i;
 
-	return this->iterator == this->size;
+	return i;
 }
 
 bool Any_file::write_data(const char* bufer, const signed long long int size)
@@ -56,6 +63,11 @@ bool Any_file::write_data(const char* bufer, const signed long long int size)
 	this->size += size;
 
 	return false;
+}
+
+bool Any_file::eof()
+{
+	return (this->size == this->iterator);
 }
 
 signed long long int Any_file::get_size() const
