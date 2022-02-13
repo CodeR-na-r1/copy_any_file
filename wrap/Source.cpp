@@ -14,7 +14,7 @@ int main()
 
 	out_file.write_data(bufer, file.get_size());
 
-	delete bufer;
+	delete[] bufer;
 
 	return 0;
 }
