@@ -23,6 +23,10 @@ public:
 
 	bool eof();
 
+	signed long long int get_pos() const;
+
+	void set_pos(const signed long long int position);
+
 	signed long long int get_size() const;
 
 	~Any_file();

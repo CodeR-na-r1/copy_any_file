@@ -70,6 +70,18 @@ bool Any_file::eof()
 	return (this->size == this->iterator);
 }
 
+signed long long int Any_file::get_pos() const
+{
+	return this->iterator;
+}
+
+void Any_file::set_pos(const signed long long int position)
+{
+	this->iterator = position;
+
+	return;
+}
+
 signed long long int Any_file::get_size() const
 {
 	return this->size;
