@@ -1,4 +1,4 @@
-#include "Any_file.h"
+﻿#include "Any_file.h"
 
 Any_file::Any_file(const char* name, Type type)
 {
