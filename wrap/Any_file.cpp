@@ -41,16 +41,12 @@ signed long long int Any_file::get_data(char* bufer, const signed long long int 
 		return 0;
 
 	signed long long int length = ((this->size - this->iterator) <= size) ? this->size - this->iterator : size;
-	signed long long int i = 0;
 
-	for (; i < length; ++i)
-	{
-		file.read(bufer + i, sizeof(char));
-	}
+	file.read(bufer, length * sizeof(char));	// Вызываем один раз, так как цена вызова системных вызовов высока
 
-	this->iterator += i;
+	this->iterator += length;
 
-	return i;
+	return length;
 }
 
 bool Any_file::write_data(const char* bufer, const signed long long int size)
